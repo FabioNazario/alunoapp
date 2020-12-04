@@ -4,7 +4,8 @@ pipeline {
     stages {
         stage('Buid') {
             steps {
-                echo 'Build'
+                git 'https://github.com/FabioNazario/alunoapp.git'
+                sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
         }
         stage('Quality Analyses') {
