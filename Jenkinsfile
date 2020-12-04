@@ -12,6 +12,12 @@ pipeline {
                 git 'https://github.com/FabioNazario/alunoapp.git'
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
+            
+            post{
+                success{
+                    archiveArtifacts 'target/*.war'
+                }
+            }
         }
         stage('Quality Analyses') {
             steps {
