@@ -1,29 +1,25 @@
 pipeline {
     agent any
 
-    tools {
-        // Install the Maven version configured as "M3" and add it to the path.
-        maven "M3"
-    }
-
     stages {
-        stage('Build') {
+        stage('Buid') {
             steps {
-                // Get some code from a GitHub repository
-                git 'https://github.com/edveloso/alunoapp.git'
-
-                // Run Maven on a Unix agent.
-                sh "mvn -Dmaven.test.failure.ignore=true clean package"
-
+                echo 'Build'
             }
-
-            post {
-                // If Maven was able to run the tests, even if some of the test
-                // failed, record the test results and archive the jar file.
-                success {
-                    //junit '**/target/surefire-reports/TEST-*.xml'
-                    archiveArtifacts 'target/*.war'
-                }
+        }
+        stage('Quality Analyses') {
+            steps {
+                echo 'Quality Analyses'
+            }
+        }
+        stage('Repository') {
+            steps {
+                echo 'Repository'
+            }
+        }
+        stage('Deploy Tomcat') {
+            steps {
+                echo 'Deploy Tomcat'
             }
         }
     }
